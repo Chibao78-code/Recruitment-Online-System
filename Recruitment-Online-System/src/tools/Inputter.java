@@ -54,4 +54,37 @@ public class Inputter {
                 return uTemp;
             }
         }
+                String name = "";
+        while (true) {
+            message = isUpdate ? "Input name(keep old information: " + uTemp.getName() + ")" : "Input name(name must be contain from 5 to 30 characteric):";
+            errorMsg = "Name must be contain from 5 to 30 characteric";
+            regex = Acceptable.anything;
+            name = input(message, errorMsg, regex);
+            if (isUpdate && name.isEmpty()) {
+                name = uTemp.getName();
+                break;
+            }
+            if (name.matches(Acceptable.nameRegex)) {
+                break;
+            } else {
+                System.err.println(errorMsg);
+            }
+        }
+
+        String phone = "";
+        while (true) {
+            message = isUpdate ? "Input phone(keep old information: " + uTemp.getPhoneNumber() + ")" : "Input phone(phone must be 10 numberics and valid in vietnamese):";
+            errorMsg = "Phone must be 10 numberics and valid in vietnamese";
+            regex = Acceptable.anything;
+            phone = input(message, errorMsg, regex);
+            if (isUpdate && phone.isEmpty()) {
+                phone = uTemp.getPhoneNumber();
+                break;
+            }
+            if (phone.matches(Acceptable.phoneRegex)) {
+                break;
+            } else {
+                System.err.println(errorMsg);
+            }
+        }
 }
