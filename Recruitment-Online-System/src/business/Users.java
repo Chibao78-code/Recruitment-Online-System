@@ -64,4 +64,27 @@ public class Users extends HashSet<User> implements Workable<User>, Serializable
         }
         return null;
     } 
+        @Override
+    public void delete(User t) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void showAll(KOLs kols) {
+        System.out.println("-------------------------------------------------------------------------------");
+        System.out.printf("%-10s | %-20s | %-11s | %-10s | %-12s | %-10s%n",
+                "KOL ID", "Name", "Phone", "Platform", "Followers", "Commission");
+        System.out.println("-------------------------------------------------------------------------------");
+        for (User user : this) {
+            KOL kol = kols.searchById(user.getPlatformCode());
+            NumberFormat nf = new DecimalFormat("#,###");
+            System.out.printf("%-10s | %-20s | %-11s | %-10s | %-12s | %-10s%n",
+                    user.getId(),
+                    user.getName(),
+                    user.getPhoneNumber(),
+                    kol.getPlatform(),
+                    nf.format(user.getFollowerCount()),
+                    user.getRate() + "%");
+        }
+        System.out.println("-------------------------------------------------------------------------------");
+    }
 }
