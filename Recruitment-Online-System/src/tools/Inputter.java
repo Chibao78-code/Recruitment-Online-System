@@ -87,4 +87,37 @@ public class Inputter {
                 System.err.println(errorMsg);
             }
         }
+                String email = "";
+        while (true) {
+            message = isUpdate ? "Input email(keep old information: " + uTemp.getEmail() + ")" : "Input email(email must be follow example@gmail.com):";
+            errorMsg = "Email must be follow example@gmail.com";
+            regex = Acceptable.anything;
+            email = input(message, errorMsg, regex);
+            if (isUpdate && email.isEmpty()) {
+                email = uTemp.getEmail();
+                break;
+            }
+            if (email.matches(Acceptable.emailRegex)) {
+                break;
+            } else {
+                System.err.println(errorMsg);
+            }
+        }
+
+        String platFormCode = "";
+        while (true) {
+            message = isUpdate ? "Input platform code(keep old information: " + uTemp.getPlatformCode() + ")" : "Input platform code(code must be (e.g., TK01,FB01,IG01,YT01)):";
+            errorMsg = "Code must be (e.g., TK01,FB01,IG01,YT01)";
+            regex = Acceptable.anything;
+            platFormCode = input(message, errorMsg, regex);
+            if (isUpdate && platFormCode.isEmpty()) {
+                platFormCode = uTemp.getPlatformCode();
+                break;
+            }
+            if (kols.searchById(platFormCode) != null) {
+                break;
+            } else {
+                System.err.println("Your input platform code doesn't exits in list KOL");
+            }
+        }
 }
