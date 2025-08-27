@@ -68,3 +68,17 @@ public class KOLs extends HashMap<String, KOL> {
             e.printStackTrace();
         }
     }
+    public KOL searchById(String code) {
+        if (code == null) {
+            return null;
+        }
+        code = code.trim();
+        for (String s : this.keySet()) {
+            if (s.trim().equalsIgnoreCase(code)) {
+                return this.get(s);
+            }
+        }
+        System.err.println("DEBUG: Not found, your input = [" + code + "], keys = " + this.keySet());
+        return null;
+    }
+}
