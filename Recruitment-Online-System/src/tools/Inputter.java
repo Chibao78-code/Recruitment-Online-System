@@ -120,4 +120,32 @@ public class Inputter {
                 System.err.println("Your input platform code doesn't exits in list KOL");
             }
         }
+                int count = 0;
+        while (true) {
+            try {
+                message = isUpdate ? "Input count(keep old information: " + uTemp.getFollowerCount() + "):" : "Input count(count must be positive integer):";
+                errorMsg = "Code must geater than zero!";
+                regex = Acceptable.anything;
+                String inputCount = input(message, errorMsg, regex);
+                if (isUpdate && inputCount.isEmpty()) {
+                    count = uTemp.getFollowerCount();
+                    break;
+                }
+                count = Integer.parseInt(inputCount);
+                if (count > 0) {
+                    break;
+                } else {
+                    System.err.println(errorMsg);
+                }
+            } catch (Exception e) {
+                System.err.println("Rental day must be a numberic!");
+            }
+        }
+
+        int rate = count > 1000000 ? 25 : 20;
+
+        User user = new User(id, name, phone, email, platFormCode, count, rate);
+
+        return user;
+    }
 }
