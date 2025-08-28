@@ -213,6 +213,39 @@ public class Main {
             System.out.println("Save all of registers successfully!");
         }
     }
+     private static void handleExit(boolean isSaved) {
+        if (registers == null || registers.isEmpty()) {
+            System.out.println("No data to save. Exiting program...");
+            System.exit(0);
+        } else if (isSaved) {
+            System.out.println("All changes already saved. Exiting program...");
+            System.exit(0);
+        } else {
+            System.out.print("Do you want to save the changes before exiting? (Y/N): ");
+            String choice = scanner.nextLine().trim();
+            if (choice.equalsIgnoreCase("Y")) {
+                registers.saveToFile();
+                System.out.println("Data saved successfully. Exiting program...");
+                System.exit(0);
+            } else if (choice.equalsIgnoreCase("N")) {
+                System.out.print("You have unsaved changes. Are you sure you want to exit without saving? (Y/N): ");
+                String confirm = scanner.nextLine().trim();
+                if (confirm.equalsIgnoreCase("Y")) {
+                    System.out.println("Exiting without saving...");
+                    System.exit(0);
+                } else {
+                    System.out.println("Exit cancelled. Returning to main menu...");
+                }
+            } else {
+                System.out.println("Invalid input. Returning to main menu...");
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        initializeSystem();
+        runMainMenu();
+    }
 
 
 }
