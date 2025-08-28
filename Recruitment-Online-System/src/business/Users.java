@@ -19,7 +19,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import models.KOL;
+import models.KolPlatForm;
 /**
  *
  * @author zzzdi
@@ -69,13 +69,13 @@ public class Users extends HashSet<KolRegister> implements Workable<KolRegister>
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    public void showAll(KOLs kols) {
+    public void showAll(KolPlatForms kols) {
         System.out.println("-------------------------------------------------------------------------------");
         System.out.printf("%-10s | %-20s | %-11s | %-10s | %-12s | %-10s%n",
                 "KOL ID", "Name", "Phone", "Platform", "Followers", "Commission");
         System.out.println("-------------------------------------------------------------------------------");
         for (KolRegister user : this) {
-            KOL kol = kols.searchById(user.getPlatformCode());
+            KolPlatForm kol = kols.searchById(user.getPlatformCode());
             NumberFormat nf = new DecimalFormat("#,###");
             System.out.printf("%-10s | %-20s | %-11s | %-10s | %-12s | %-10s%n",
                     user.getId(),

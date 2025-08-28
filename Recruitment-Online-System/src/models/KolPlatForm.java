@@ -11,15 +11,15 @@ import java.util.Objects;
  *
  * @author zzzdi
  */
-public class KOL {
+public class KolPlatForm {
     private String code;
     private String Platform;
     private String Description;
 
-    public KOL() {
+    public KolPlatForm() {
     }
 
-    public KOL(String code, String Platform, String Description) {
+    public KolPlatForm(String code, String Platform, String Description) {
         this.code = code;
         this.Platform = Platform;
         this.Description = Description;
@@ -65,7 +65,7 @@ public class KOL {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final KOL other = (KOL) obj;
+        final KolPlatForm other = (KolPlatForm) obj;
         if (this.code.equalsIgnoreCase(other.code)) {
             return false;
         }

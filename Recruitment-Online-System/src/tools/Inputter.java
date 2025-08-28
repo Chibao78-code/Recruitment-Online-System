@@ -4,7 +4,7 @@
  */
 package tools;
 import business.Users;
-import business.KOLs;
+import business.KolPlatForms;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
 import models.KolRegister;
-import models.KOL;
+import models.KolPlatForm;
 /**
  *
  * @author zzzdi
@@ -39,7 +39,7 @@ public class Inputter {
         } while (reInputter);
         return result;
     }
-        public KolRegister inputUser(boolean isUpdate, Users users, KOLs kols) {
+        public KolRegister inputUser(boolean isUpdate, Users users, KolPlatForms kols) {
         KolRegister uTemp = null;
 
         String id = "";

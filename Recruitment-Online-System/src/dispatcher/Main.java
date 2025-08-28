@@ -4,7 +4,7 @@
  */
 package dispatcher;
 import business.Users;
-import business.KOLs;
+import business.KolPlatForms;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 import models.KolRegister;
-import models.KOL;
+import models.KolPlatForm;
 import tools.Inputter;
 /**
  *
@@ -34,12 +34,12 @@ public class Main {
 
     private static Inputter inputter;
     private static Users users;
-    private static KOLs kols;
+    private static KolPlatForms kols;
     private static Scanner scanner;
 
     private static void initializeSystem() {
         inputter = new Inputter();
-        kols = new KOLs(KOL_FILE);
+        kols = new KolPlatForms(KOL_FILE);
         users = new Users(USER_FILE);
         scanner = new Scanner(System.in);
     }
