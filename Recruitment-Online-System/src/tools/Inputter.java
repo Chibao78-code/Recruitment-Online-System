@@ -13,7 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Scanner;
-import models.User;
+import models.KolRegister;
 import models.KOL;
 /**
  *
@@ -39,8 +39,8 @@ public class Inputter {
         } while (reInputter);
         return result;
     }
-        public User inputUser(boolean isUpdate, Users users, KOLs kols) {
-        User uTemp = null;
+        public KolRegister inputUser(boolean isUpdate, Users users, KOLs kols) {
+        KolRegister uTemp = null;
 
         String id = "";
         String message = isUpdate ? "Input kol id" : "Input kol id(id must start with(BT,FS,BC,GM,TL) adn 6 numberics after):";
@@ -144,7 +144,7 @@ public class Inputter {
 
         int rate = count > 1000000 ? 25 : 20;
 
-        User user = new User(id, name, phone, email, platFormCode, count, rate);
+        KolRegister user = new KolRegister(id, name, phone, email, platFormCode, count, rate);
 
         return user;
     }

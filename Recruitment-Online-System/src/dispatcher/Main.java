@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
-import models.User;
+import models.KolRegister;
 import models.KOL;
 import tools.Inputter;
 /**
@@ -84,4 +84,39 @@ public class Main {
                 throw new AssertionError();
         }
     }
+        private static void handleRegisterUser() {
+        int option;
+        do {
+            users.addNew(inputter.inputUser(false, users, kols));
+            System.out.println("1. Continue add guest");
+            System.out.println("2. Return to the main menu");
+            System.out.println("Enter your option: ");
+            option = Integer.parseInt(scanner.nextLine());
+        } while (option != RETURN_MAIN__MENU);
+    }
+
+    private static void handleUpdateUser() {
+        int option;
+        do {
+            users.update(inputter.inputUser(true, users, kols));
+            System.out.println("1. Continue update guest");
+            System.out.println("2. Return to the main menu");
+            System.out.println("Enter your option: ");
+            option = Integer.parseInt(scanner.nextLine());
+        } while (option != RETURN_MAIN__MENU);
+    }
+
+    private static void handleDisplayUser() {
+        if(users==null||users.isEmpty()){
+            System.err.println("No Kols have registered yet");
+        }else{
+            users.showAll(kols);
+        }
+    }
+
+    public static void main(String[] args) {
+        initializeSystem();
+        runMainMenu();
+    }
+
 }

@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package models;
-import business.KOLs;
+import business.KolPlatForms;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -12,7 +12,7 @@ import java.util.Objects;
  *
  * @author zzzdi
  */
-public class User implements Serializable {
+public class KolRegister implements Serializable {
 
     private String id;
     private String name;
@@ -20,23 +20,24 @@ public class User implements Serializable {
     private String email;
     private String platformCode;
     private int followerCount;
-    private int rate;
+    private int commissionRate;
 
-    public User() {
+    public KolRegister() {
     }
 
-    public User(String id, String name, String phoneNumber, String email, String platformCode, int followerCount, int rate) {
+    public KolRegister(String id, String name, String phoneNumber, String email, String platformCode, int followerCount, int commissionRate) {
         this.id = id;
         this.name = name;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.platformCode = platformCode;
         this.followerCount = followerCount;
-        this.rate = rate;
+        this.commissionRate = commissionRate;
     }
 
     public String getId() {
-        return id;
+        String kolCode = this.id.substring(0, 2).toUpperCase() + this.id.substring(2);
+        return kolCode;
     }
 
     public void setId(String id) {
@@ -83,17 +84,17 @@ public class User implements Serializable {
         this.followerCount = followerCount;
     }
 
-    public int getRate() {
-        return rate;
+    public int getCommissionRate() {
+        return commissionRate;
     }
 
-    public void setRate(int rate) {
-        this.rate = rate;
+    public void setCommissionRate(int commissionRate) {
+        this.commissionRate = commissionRate;
     }
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", name=" + name + ", phoneNumber=" + phoneNumber + ", email=" + email + ", platformCode=" + platformCode + ", followerCount=" + followerCount + ", rate=" + rate + '}';
+        return "User{" + "id=" + id + ", name=" + name + ", phoneNumber=" + phoneNumber + ", email=" + email + ", platformCode=" + platformCode + ", followerCount=" + followerCount + ", rate=" + commissionRate + '}';
     }
 
     @Override
@@ -112,12 +113,33 @@ public class User implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final User other = (User) obj;
+        final KolRegister other = (KolRegister) obj;
         if (!this.id.equalsIgnoreCase(other.getId())) {
             return false;
         }
         return true;
     }
 
-}
+    public void display(KolPlatForms kols) {
+        System.out.println("KOL Details:");
+        System.out.println("-------------------------------------------------------------------------------");
+        System.out.printf("%-12s: %s%n", "KOL ID", this.getId());
+        System.out.printf("%-12s: %s%n", "Name", formatString(this.getName()));
+        System.out.printf("%-12s: %s%n", "Phone", this.getPhoneNumber());
+        KolPlatForm kol = kols.searchById(this.getPlatformCode());
+        System.out.printf("%-12s: %s%n", "Platform", kol.getPlatform());
+        System.out.printf("%-12s: %,d%n", "Followers", this.getFollowerCount());
+        System.out.printf("%-12s: %s%%%n", "Commission", this.getFollowerCount());
+        System.out.println("-------------------------------------------------------------------------------");
+    }
 
+    public String formatString(String s) {
+        String[] parts = s.split("\\s");
+        String name = "";
+        for (String part : parts) {
+            name += part.substring(0, 1).toUpperCase() + part.substring(1).toLowerCase()+" ";
+        }
+        return name.trim();
+    }
+
+}

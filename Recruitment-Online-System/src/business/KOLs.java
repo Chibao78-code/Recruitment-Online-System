@@ -15,7 +15,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import models.User;
+import models.KolRegister;
 /**
  *
  * @author zzzdi
