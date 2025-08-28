@@ -20,7 +20,7 @@ import tools.Inputter;
  * @author zzzdi
  */
 public class Main {
-         private static final int REGISTER_KOL = 1;
+    private static final int REGISTER_KOL = 1;
     private static final int UPDATE_REGISTER = 2;
     private static final int DISPLAY_REGISTERS = 3;
     private static final int DELETE_REGISTER = 4;
@@ -61,7 +61,8 @@ public class Main {
         System.out.println("11. DisplayKols");
         System.out.print("Enter Test Case No. : ");
     }
-        private static int getChoice() {
+
+    private static int getChoice() {
         return Integer.parseInt(scanner.nextLine());
     }
 
@@ -141,11 +142,15 @@ public class Main {
             registers.showAll(null, platforms);
         }
     }
-
-    public static void main(String[] args) {
-        initializeSystem();
-        runMainMenu();
+    private static void handleDisplayKols(){
+        if(registers == null ||registers.isEmpty() ){
+            System.err.println("no koils");
+        }else{
+            registers.showAll(null, platforms);
+            
+        }
     }
+
     private static void handleDeleteRegister() {
         String keyword = "";
         while (true) {
@@ -185,7 +190,8 @@ public class Main {
             registers.showAll(list, platforms);
         }
     }
-        private static void handleFilterByCategory() {
+
+    private static void handleFilterByCategory() {
         System.out.println("Input category code(e.g., BT,FS,BC,GM,TL) for search: ");
         String keyword = scanner.nextLine();
         List<KolRegister> list = registers.filterByCategoty(keyword);
@@ -213,7 +219,8 @@ public class Main {
             System.out.println("Save all of registers successfully!");
         }
     }
-     private static void handleExit(boolean isSaved) {
+
+    private static void handleExit(boolean isSaved) {
         if (registers == null || registers.isEmpty()) {
             System.out.println("No data to save. Exiting program...");
             System.exit(0);
@@ -247,5 +254,5 @@ public class Main {
         runMainMenu();
     }
 
-
 }
+
