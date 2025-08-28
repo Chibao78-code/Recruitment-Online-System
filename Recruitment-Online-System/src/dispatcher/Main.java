@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package dispatcher;
-import business.Users;
+import business.KolRegisters;
 import business.KolPlatForms;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,14 +33,14 @@ public class Main {
     private static final String USER_FILE = "kol_registrations.dat";
 
     private static Inputter inputter;
-    private static Users users;
+    private static KolRegisters users;
     private static KolPlatForms kols;
     private static Scanner scanner;
 
     private static void initializeSystem() {
         inputter = new Inputter();
         kols = new KolPlatForms(KOL_FILE);
-        users = new Users(USER_FILE);
+        users = new KolRegisters(USER_FILE);
         scanner = new Scanner(System.in);
     }
 

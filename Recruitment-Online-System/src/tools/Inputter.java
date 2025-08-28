@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package tools;
-import business.Users;
+import business.KolRegisters;
 import business.KolPlatForms;
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,7 +39,7 @@ public class Inputter {
         } while (reInputter);
         return result;
     }
-        public KolRegister inputUser(boolean isUpdate, Users users, KolPlatForms kols) {
+        public KolRegister inputUser(boolean isUpdate, KolRegisters users, KolPlatForms kols) {
         KolRegister uTemp = null;
 
         String id = "";
