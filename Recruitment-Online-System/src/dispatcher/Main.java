@@ -185,6 +185,34 @@ public class Main {
             registers.showAll(list, platforms);
         }
     }
+        private static void handleFilterByCategory() {
+        System.out.println("Input category code(e.g., BT,FS,BC,GM,TL) for search: ");
+        String keyword = scanner.nextLine();
+        List<KolRegister> list = registers.filterByCategoty(keyword);
+        if (list == null || list.isEmpty()) {
+            System.out.println("No category has registered under this category.");
+        } else {
+            registers.showAll(list, platforms);
+        }
+    }
+
+    private static void handleDisplayRegisterNumbersByPlatform() {
+        List<KolRegister> list = registers.getAll();
+        if (list == null || list.isEmpty()) {
+            System.err.println("No kol has registered yet!");
+        } else {
+            platforms.showCategoryByPlatform(list);
+        }
+    }
+
+    private static void handleSaveRegister() {
+        if (registers == null || registers.isEmpty()) {
+            System.err.println("No kol registered yet to save");
+        } else {
+            registers.saveToFile();
+            System.out.println("Save all of registers successfully!");
+        }
+    }
 
 
 }
