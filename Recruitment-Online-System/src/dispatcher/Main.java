@@ -57,4 +57,31 @@ public class Main {
         System.out.println("9. Exit");
         System.out.print("Enter Test Case No. : ");
     }
+        private static void runMainMenu() {
+        int testcase;
+        do {
+            displayMainMenu();
+            testcase = getChoice();
+            processMenuChoice(testcase);
+        } while (testcase != EXIT);
+    }
+
+    private static void processMenuChoice(int testCase) {
+        switch (testCase) {
+            case IMPORT_USER:
+                handleRegisterUser();
+                break;
+            case UPDATE_USER:
+                handleUpdateUser();
+                break;
+            case DISPLAY_USER:
+                handleDisplayUser();
+                break;
+            case EXIT:
+                //handleExit();
+                break;
+            default:
+                throw new AssertionError();
+        }
+    }
 }
