@@ -29,7 +29,6 @@ public class Main {
     private static final int DISPLAY_REGISTER_NUMBERS_BY_FLATFORM = 7;
     private static final int SAVE_REGISTER = 8;
     private static final int EXIT = 9;
-    private static final int DISPLAY_KOLS = 11;
     private static final int RETURN_MAIN_MENU = 2;
     private static final String PLATFORM_FILE = "KOLList.csv";
     private static final String REGISTER_FILE = "kol_registrations.dat";
@@ -58,8 +57,7 @@ public class Main {
         System.out.println("7. Statistics of Registration Numbers by Platform");
         System.out.println("8. Save Data to File");
         System.out.println("9. Exit");
-        System.out.println("11. DisplayKols");
-        System.out.print("Enter Test Case No. : ");
+        System.out.print("Enter choice: ");
     }
 
     private static int getChoice() {
@@ -104,9 +102,6 @@ public class Main {
             case EXIT:
                 handleExit(isSaved);
                 break;
-            case DISPLAY_KOLS:
-                handleDisplayKols();
-                break;
             default:
                 System.out.println("Invalid choice. Please enter a number from 1 to 9.");
                 break;
@@ -117,7 +112,7 @@ public class Main {
         int option;
         do {
             registers.addNew(inputter.inputRegister(false, registers, platforms));
-            System.out.println("1. Continue add guest");
+            System.out.println("1. Continue adding KOL");
             System.out.println("2. Return to the main menu");
             System.out.println("Enter your option: ");
             option = Integer.parseInt(scanner.nextLine());
@@ -128,7 +123,7 @@ public class Main {
         int option;
         do {
             registers.update(inputter.inputRegister(true, registers, platforms));
-            System.out.println("1. Continue update guest");
+            System.out.println("1. Continue updating KOL");
             System.out.println("2. Return to the main menu");
             System.out.println("Enter your option: ");
             option = Integer.parseInt(scanner.nextLine());
@@ -137,17 +132,9 @@ public class Main {
 
     private static void handleDisplayRegister() {
         if (registers == null || registers.isEmpty()) {
-            System.err.println("No Kols have registered yet");
+            System.err.println("No KOLs have registered yet");
         } else {
             registers.showAll(null, platforms);
-        }
-    }
-    private static void handleDisplayKols(){
-        if(registers == null ||registers.isEmpty() ){
-            System.err.println("no koils");
-        }else{
-            registers.showAll(null, platforms);
-            
         }
     }
 

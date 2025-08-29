@@ -66,7 +66,7 @@ public class KolPlatForm {
             return false;
         }
         final KolPlatForm other = (KolPlatForm) obj;
-        if (this.code.equalsIgnoreCase(other.code)) {
+        if (!this.code.equalsIgnoreCase(other.code)) {
             return false;
         }
         return true;

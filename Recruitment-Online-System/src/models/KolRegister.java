@@ -129,7 +129,7 @@ public class KolRegister implements Serializable {
         KolPlatForm kol = kols.searchById(this.getPlatformCode());
         System.out.printf("%-12s: %s%n", "Platform", kol.getPlatform());
         System.out.printf("%-12s: %,d%n", "Followers", this.getFollowerCount());
-        System.out.printf("%-12s: %s%%%n", "Commission", this.getFollowerCount());
+        System.out.printf("%-12s: %s%%%n", "Commission", this.getCommissionRate());
         System.out.println("-------------------------------------------------------------------------------");
     }
 

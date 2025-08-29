@@ -43,7 +43,7 @@ public class KolRegisters extends HashSet<KolRegister> implements Workable<KolRe
     @Override
     public void addNew(KolRegister t) {
         if (isDuplicaition(t)) {
-            System.err.println("Dupplicate Kol id");
+            System.err.println("Duplicate KOL ID");
         } else {
             this.add(t);
             this.saved = false;
@@ -86,15 +86,13 @@ public class KolRegisters extends HashSet<KolRegister> implements Workable<KolRe
         for (KolRegister r : register) {
             KolPlatForm platForm = platForms.searchById(r.getPlatformCode());
             NumberFormat nf = new DecimalFormat("#,###");
-            System.out.printf("%-10s | 1.%-20s | %-11s | %-10s | %-12s | %-10s%n",
-                    
+            System.out.printf("%-10s | %-20s | %-11s | %-10s | %-12s | %-10s%n",
                     r.getId(),
                     r.formatString(r.getName()),
                     r.getPhoneNumber(),
                     platForm.getPlatform(),
                     nf.format(r.getFollowerCount()),
                     r.getCommissionRate() + "%");
-                    System.out.println("1");
 
         }
         System.out.println("-------------------------------------------------------------------------------");
