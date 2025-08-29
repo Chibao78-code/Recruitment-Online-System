@@ -15,12 +15,12 @@ import java.util.Date;
 import java.util.Scanner;
 import models.KolRegister;
 import models.KolPlatForm;
-/**
+        /*
  *
  * @author zzzdi
  */
 public class Inputter {
-    private Scanner scanner;
+     private Scanner scanner;
 
     public Inputter() {
         scanner = new Scanner(System.in);
@@ -39,29 +39,31 @@ public class Inputter {
         } while (reInputter);
         return result;
     }
-        public KolRegister inputUser(boolean isUpdate, KolRegisters users, KolPlatForms kols) {
-        KolRegister uTemp = null;
+
+    public KolRegister inputRegister(boolean isUpdate, KolRegisters users, KolPlatForms kols) {
+        KolRegister rTemp = null;
 
         String id = "";
-        String message = isUpdate ? "Input kol id" : "Input kol id(id must start with(BT,FS,BC,GM,TL) adn 6 numberics after):";
+        String message = isUpdate ? "Input kol id" : "Input kol id(id must start with(BT,FS,BC,GM,TL) and 6 numberics after):";
         String errorMsg = "Id must start with(BT,FS,BC,GM,TL) adn 6 numberics after";
         String regex = Acceptable.idRegex;
         id = input(message, errorMsg, regex);
         if (isUpdate) {
-            uTemp = users.searchById(id);
-            if (uTemp == null) {
+            rTemp = users.searchById(id);
+            if (rTemp == null) {
                 System.err.println("This KOL has not registered yet");
-                return uTemp;
+                return rTemp;
             }
         }
-                String name = "";
+
+        String name = "";
         while (true) {
-            message = isUpdate ? "Input name(keep old information: " + uTemp.getName() + ")" : "Input name(name must be contain from 5 to 30 characteric):";
+            message = isUpdate ? "Input name(keep old information: " + rTemp.getName() + ")" : "Input name(name must be contain from 5 to 30 characteric):";
             errorMsg = "Name must be contain from 5 to 30 characteric";
             regex = Acceptable.anything;
             name = input(message, errorMsg, regex);
             if (isUpdate && name.isEmpty()) {
-                name = uTemp.getName();
+                name = rTemp.getName();
                 break;
             }
             if (name.matches(Acceptable.nameRegex)) {
@@ -73,12 +75,12 @@ public class Inputter {
 
         String phone = "";
         while (true) {
-            message = isUpdate ? "Input phone(keep old information: " + uTemp.getPhoneNumber() + ")" : "Input phone(phone must be 10 numberics and valid in vietnamese):";
+            message = isUpdate ? "Input phone(keep old information: " + rTemp.getPhoneNumber() + ")" : "Input phone(phone must be 10 numberics and valid in vietnamese):";
             errorMsg = "Phone must be 10 numberics and valid in vietnamese";
             regex = Acceptable.anything;
             phone = input(message, errorMsg, regex);
             if (isUpdate && phone.isEmpty()) {
-                phone = uTemp.getPhoneNumber();
+                phone = rTemp.getPhoneNumber();
                 break;
             }
             if (phone.matches(Acceptable.phoneRegex)) {
@@ -87,14 +89,15 @@ public class Inputter {
                 System.err.println(errorMsg);
             }
         }
-                String email = "";
+
+        String email = "";
         while (true) {
-            message = isUpdate ? "Input email(keep old information: " + uTemp.getEmail() + ")" : "Input email(email must be follow example@gmail.com):";
+            message = isUpdate ? "Input email(keep old information: " + rTemp.getEmail() + ")" : "Input email(email must be follow example@gmail.com):";
             errorMsg = "Email must be follow example@gmail.com";
             regex = Acceptable.anything;
             email = input(message, errorMsg, regex);
             if (isUpdate && email.isEmpty()) {
-                email = uTemp.getEmail();
+                email = rTemp.getEmail();
                 break;
             }
             if (email.matches(Acceptable.emailRegex)) {
@@ -106,12 +109,12 @@ public class Inputter {
 
         String platFormCode = "";
         while (true) {
-            message = isUpdate ? "Input platform code(keep old information: " + uTemp.getPlatformCode() + ")" : "Input platform code(code must be (e.g., TK01,FB01,IG01,YT01)):";
+            message = isUpdate ? "Input platform code e.g., TK01,FB01,IG01,YT01(keep old information: " + rTemp.getPlatformCode() + ")" : "Input platform code(code must be (e.g., TK01,FB01,IG01,YT01)):";
             errorMsg = "Code must be (e.g., TK01,FB01,IG01,YT01)";
             regex = Acceptable.anything;
             platFormCode = input(message, errorMsg, regex);
             if (isUpdate && platFormCode.isEmpty()) {
-                platFormCode = uTemp.getPlatformCode();
+                platFormCode = rTemp.getPlatformCode();
                 break;
             }
             if (kols.searchById(platFormCode) != null) {
@@ -120,15 +123,16 @@ public class Inputter {
                 System.err.println("Your input platform code doesn't exits in list KOL");
             }
         }
-                int count = 0;
+
+        int count = 0;
         while (true) {
             try {
-                message = isUpdate ? "Input count(keep old information: " + uTemp.getFollowerCount() + "):" : "Input count(count must be positive integer):";
+                message = isUpdate ? "Input count(keep old information: " + rTemp.getFollowerCount() + "):" : "Input count(count must be positive integer):";
                 errorMsg = "Code must geater than zero!";
                 regex = Acceptable.anything;
                 String inputCount = input(message, errorMsg, regex);
                 if (isUpdate && inputCount.isEmpty()) {
-                    count = uTemp.getFollowerCount();
+                    count = rTemp.getFollowerCount();
                     break;
                 }
                 count = Integer.parseInt(inputCount);
@@ -144,8 +148,9 @@ public class Inputter {
 
         int rate = count > 1000000 ? 25 : 20;
 
-        KolRegister user = new KolRegister(id, name, phone, email, platFormCode, count, rate);
+        KolRegister register = new KolRegister(id, name, phone, email, platFormCode, count, rate);
 
-        return user;
+        return register;
     }
 }
+
