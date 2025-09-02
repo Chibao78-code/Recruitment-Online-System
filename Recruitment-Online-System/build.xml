@@ -10,6 +10,30 @@
 <project name="Recruitment-Online-System" default="default" basedir=".">
     <description>Builds, tests, and runs the project Recruitment-Online-System.</description>
     <import file="nbproject/build-impl.xml"/>
+    
+    <!-- JUnit 5 properties -->
+    <property name="lib.dir" value="lib"/>
+    <property name="test.src.dir" value="test/junit"/>
+    <property name="test.build.dir" value="build/test"/>
+    <property name="test.report.dir" value="build/test-reports"/>
+    
+    <!-- JUnit classpath -->
+    <path id="junit.classpath">
+        <fileset dir="${lib.dir}">
+            <include name="junit-jupiter-api-*.jar"/>
+            <include name="junit-jupiter-engine-*.jar"/>
+            <include name="junit-platform-*.jar"/>
+            <include name="opentest4j-*.jar"/>
+            <include name="mockito-*.jar"/>
+        </fileset>
+    </path>
+    
+    <!-- Test classpath -->
+    <path id="test.classpath">
+        <path refid="junit.classpath"/>
+        <pathelement location="${build.classes.dir}"/>
+        <pathelement location="${test.build.dir}"/>
+    </path>
     <!--
 
     There exist several targets which are by default empty and which can be 
@@ -70,4 +94,46 @@
     nbproject/build-impl.xml file. 
 
     -->
+    
+    <!-- Compile test sources -->
+    <target name="compile-tests" depends="compile">
+        <mkdir dir="${test.build.dir}"/>
+        <javac srcdir="${test.src.dir}"
+               destdir="${test.build.dir}"
+               classpathref="test.classpath"
+               debug="true"
+               includeantruntime="false"/>
+    </target>
+    
+    <!-- Run JUnit tests -->
+    <target name="test" depends="compile-tests">
+        <mkdir dir="${test.report.dir}"/>
+        <junit printsummary="yes" haltonfailure="no" fork="true">
+            <classpath refid="test.classpath"/>
+            <formatter type="xml"/>
+            <formatter type="plain" usefile="false"/>
+            <batchtest todir="${test.report.dir}">
+                <fileset dir="${test.src.dir}">
+                    <include name="**/*Test.java"/>
+                </fileset>
+            </batchtest>
+        </junit>
+    </target>
+    
+    <!-- Generate test report -->
+    <target name="test-report" depends="test">
+        <junitreport todir="${test.report.dir}">
+            <fileset dir="${test.report.dir}">
+                <include name="TEST-*.xml"/>
+            </fileset>
+            <report format="frames" todir="${test.report.dir}/html"/>
+        </junitreport>
+        <echo message="Test report generated in ${test.report.dir}/html"/>
+    </target>
+    
+    <!-- Clean test artifacts -->
+    <target name="clean-tests">
+        <delete dir="${test.build.dir}"/>
+        <delete dir="${test.report.dir}"/>
+    </target>
 </project>
